@@ -3,7 +3,7 @@
 
 **Februry-March 2026**
 
-**[Click this Link to proceed](https://github.com/diegosasso/workshop_ISH2023/wiki)**
+**[Click this Link to proceed](https://github.com/sergeitarasov/Phenoscript-Cuiaba-2026/wiki)**
 
 
 #### Organizers
