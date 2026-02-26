@@ -1,0 +1,7 @@
+# Exclude large OWL files from the build context.
+# They are either downloaded by make-tbox or provided via the volume mount at runtime.
+source_ontologies/
+
+# Exclude generated outputs (written back to host via volume mount)
+output/
+log/

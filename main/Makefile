@@ -1,6 +1,6 @@
 # Define variables
-PHS_FILE = grebennikovius_descriptions.phs
-OUT_FILE_OWL = grebennikovius
+PHS_FILE = test_description.phs
+OUT_FILE_OWL = my_species
 CONFIG_FILE = phenotypes/phs-config.yaml
 
 
