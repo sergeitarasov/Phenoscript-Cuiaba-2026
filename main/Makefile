@@ -47,7 +47,9 @@ make-tbox:
 # merge all ontologies into a single file
 reason-owl:
 	@echo "\nSTEP: reason using materializer";
-	materializer file --ontology-file source_ontologies/tbox.owl --input output/$(OUT_FILE_OWL).owl --output output/$(OUT_FILE_OWL)-reasoned_raw.ttl --reasoner whelk > log/materializer.log
+	@echo "Available memory:"; free -h || echo "Memory info unavailable"
+	@echo "Starting materializer with increased memory...";
+	materializer file --ontology-file source_ontologies/tbox.owl --input output/$(OUT_FILE_OWL).owl --output output/$(OUT_FILE_OWL)-reasoned_raw.ttl --reasoner whelk > log/materializer.log 2>&1 || (echo "Materializer failed. Check log:"; tail -20 log/materializer.log; exit 1)
 	@echo "\nSTEP: annotate inffered axioms";
 	update --data output/$(OUT_FILE_OWL)-reasoned_raw.ttl --update utils/source_queries/annotate.ru --dump > output/$(OUT_FILE_OWL)-reasoned-annotated.ttl
 	@echo "\nSTEP: merge all ontologies into a single file";

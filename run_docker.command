@@ -18,7 +18,7 @@ fi
 
 echo ""
 echo "=== Running pipeline ==="
-if ! docker run --rm -v "$MAIN_DIR:/main" "$IMAGE_NAME"; then
+if ! docker run --rm --memory=12g --memory-swap=16g -v "$MAIN_DIR:/main" "$IMAGE_NAME"; then
     echo ""
     echo "ERROR: Pipeline failed. See output above for details."
     read -rp "Press Enter to close..."

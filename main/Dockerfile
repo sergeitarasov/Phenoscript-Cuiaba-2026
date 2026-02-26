@@ -1,8 +1,8 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV JAVA_OPTS="-Xmx8G"
-ENV JVM_ARGS="-Xmx8G"
+ENV JAVA_OPTS="-Xmx10G -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
+ENV JVM_ARGS="-Xmx10G -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
 
 # System deps
 RUN apt-get update && apt-get install -y \
