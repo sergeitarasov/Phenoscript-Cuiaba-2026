@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
-# run_docker.sh — pull the phenoscript pipeline image and run it.
+# run_docker.sh — build the phenoscript pipeline image and run it.
 # All output is written directly to your local main/ directory via a volume mount.
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MAIN_DIR="$SCRIPT_DIR/main"
-IMAGE="ghcr.io/sergeitarasov/phenoscript-cuiaba-2026:latest"
+IMAGE_NAME="phenoscript-pipeline"
 
 # --------------------------------------------------------------------------
-echo "=== Pulling Docker image ==="
-docker pull "$IMAGE"
+echo "=== Building Docker image: $IMAGE_NAME ==="
+docker build -t "$IMAGE_NAME" "$MAIN_DIR"
 
 # --------------------------------------------------------------------------
 echo ""
 echo "=== Running pipeline (output will appear in main/output and main/log) ==="
 docker run --rm \
     -v "$MAIN_DIR:/main" \
-    "$IMAGE"
+    "$IMAGE_NAME"
 
 # --------------------------------------------------------------------------
 echo ""

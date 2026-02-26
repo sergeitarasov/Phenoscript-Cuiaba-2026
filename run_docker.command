@@ -5,20 +5,20 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-IMAGE="ghcr.io/sergeitarasov/phenoscript-cuiaba-2026:latest"
+IMAGE_NAME="phenoscript-pipeline"
 MAIN_DIR="$(pwd)/main"
 
-echo "=== Pulling Docker image ==="
-if ! docker pull "$IMAGE"; then
+echo "=== Building Docker image: $IMAGE_NAME ==="
+if ! docker build -t "$IMAGE_NAME" "$MAIN_DIR"; then
     echo ""
-    echo "ERROR: Could not pull image. Is Docker Desktop running and do you have internet access?"
+    echo "ERROR: Docker build failed. Is Docker Desktop running?"
     read -rp "Press Enter to close..."
     exit 1
 fi
 
 echo ""
 echo "=== Running pipeline ==="
-if ! docker run --rm -v "$MAIN_DIR:/main" "$IMAGE"; then
+if ! docker run --rm -v "$MAIN_DIR:/main" "$IMAGE_NAME"; then
     echo ""
     echo "ERROR: Pipeline failed. See output above for details."
     read -rp "Press Enter to close..."

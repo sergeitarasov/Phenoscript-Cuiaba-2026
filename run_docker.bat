@@ -2,21 +2,21 @@
 setlocal
 cd /d "%~dp0"
 
-set IMAGE=ghcr.io/sergeitarasov/phenoscript-cuiaba-2026:latest
+set IMAGE_NAME=phenoscript-pipeline
 set MAIN_DIR=%~dp0main
 
-echo === Pulling Docker image ===
-docker pull %IMAGE%
+echo === Building Docker image: %IMAGE_NAME% ===
+docker build -t %IMAGE_NAME% "%MAIN_DIR%"
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo ERROR: Could not pull image. Is Docker Desktop running and do you have internet access?
+    echo ERROR: Docker build failed. Is Docker Desktop running?
     pause
     exit /b 1
 )
 
 echo.
 echo === Running pipeline ===
-docker run --rm -v "%MAIN_DIR%:/main" %IMAGE%
+docker run --rm -v "%MAIN_DIR%:/main" %IMAGE_NAME%
 if %ERRORLEVEL% neq 0 (
     echo.
     echo ERROR: Pipeline failed. See output above for details.
