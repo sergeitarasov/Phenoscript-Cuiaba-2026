@@ -27,7 +27,7 @@ RUN mkdir -p /opt/robot \
 ENV PATH="/opt/robot:${PATH}"
 
 # Apache Jena 5.1.0 (riot, shacl, update, arq)
-ENV JENA_VERSION=5.1.0
+ENV JENA_VERSION=5.3.0
 RUN wget -q https://archive.apache.org/dist/jena/binaries/apache-jena-${JENA_VERSION}.tar.gz \
     && tar -xzf apache-jena-${JENA_VERSION}.tar.gz \
     && mv apache-jena-${JENA_VERSION} /opt/jena \
