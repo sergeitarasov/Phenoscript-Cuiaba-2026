@@ -48,15 +48,29 @@ https://github.com/sergeitarasov/PhenoScript/wiki/Introduction-to-Phenoscript-La
 
 This part uses Docker to run the full pipeline. Docker bundles all required tools so you do not need to install them individually.
 
-### Step 5 — Install Docker Desktop
+### Step 5 — Install Docker
+
+**Windows and macOS** — install Docker Desktop:
 
 | Platform | Download |
 |---|---|
 | Windows | https://docs.docker.com/desktop/install/windows-install/ |
 | macOS | https://docs.docker.com/desktop/install/mac-install/ |
-| Linux | https://docs.docker.com/desktop/install/linux-install/ |
 
 After installation, **start Docker Desktop** and wait until it shows a green "Engine running" status.
+
+**Linux** — install Docker Engine (no Desktop needed):
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+```
+
+Then **log out and back in**, and verify the installation:
+
+```bash
+docker run hello-world
+```
 
 ### Step 6 — Run the Pipeline
 
@@ -119,7 +133,8 @@ https://www.michaeldebellis.com/post/new-protege-pizza-tutorial
 ## Troubleshooting
 
 **Script does nothing / "Docker: command not found"**
-- Make sure Docker Desktop is installed and running (green icon in the system tray / menu bar).
+- **Windows/macOS:** make sure Docker Desktop is installed and running (green icon in the system tray / menu bar).
+- **Linux:** make sure Docker Engine is installed and your user is in the `docker` group (see Step 5).
 
 **Pipeline fails mid-way**
 - Check `main/log/shacl.log` and `main/log/materializer.log` for details.
@@ -132,7 +147,8 @@ https://www.michaeldebellis.com/post/new-protege-pizza-tutorial
   ```
 
 **Out of memory during reasoning**
-- Open Docker Desktop → **Settings → Resources** and increase Memory to at least 8 GB.
+- **Windows/macOS:** Docker Desktop caps container memory at 2 GB by default. Open Docker Desktop → **Settings → Resources** and increase Memory to at least 8 GB.
+- **Linux:** Docker Engine uses system RAM directly — ensure your machine has at least 8 GB free.
 
 ---
 
